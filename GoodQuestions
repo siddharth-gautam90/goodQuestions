@@ -25,3 +25,17 @@
         }
         int posCount = n - lo; //Nums of positive elem 
         return Math.max(negCount, posCount);
+
+// Search a 2D matrix
+// find total rows and cols in the matrix
+        int rows = arr.length, cols = arr[0].length;
+        int low = 0, high = rows * cols -1;// find total elem in the matrix
+        while(low<=high){
+            int mid = (low+high)/2;// find mid index 
+            // 1D index (mid) to 2D matrix coordinates (row , col) convert
+            int midRow = mid/cols, midCol = mid%cols; 
+            if(arr[midRow][midCol] == target) return true; // target found 
+            else if(arr[midRow][midCol]> target) high = mid-1;// Agar current element target se bada hai, iska matlab target left half me hoga
+            else low = mid +1; // Agar current element target se chhota hai, toh target right half me hoga
+        }
+         return false; // target not found 
