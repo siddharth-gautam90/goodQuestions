@@ -1,4 +1,4 @@
-// Maximmum count of positive integer or negative integer
+ Maximmum count of positive integer or negative integer
  // find count of NEGATIVE nums (<0)
  // find the index of the first elem that is >=0,
 // because arr is sorted, all elems before this index are negative
@@ -26,8 +26,8 @@
         int posCount = n - lo; //Nums of positive elem 
         return Math.max(negCount, posCount);
 
-// Search a 2D matrix
-// find total rows and cols in the matrix
+Search a 2D matrix
+find total rows and cols in the matrix
         int rows = arr.length, cols = arr[0].length;
         int low = 0, high = rows * cols -1;// find total elem in the matrix
         while(low<=high){
@@ -42,3 +42,12 @@
 
 
 kth missing positive number 
+   int low = 0, high = arr.length - 1;// set pointers start to end index 
+        while(low<=high){
+            int mid = low + (high - low)/2;
+            int correctNo = mid + 1 ;// if none of them num miss , toh mid pr mid+1 value hona chahiye 
+            int missing = arr[mid] - correctNo;// find miss nums until arr[mid]
+            if(missing >= k) high = mid - 1;// if miss count 'k' or greater , than find nums left side 
+            else low = mid +1 ;// if miss count 'k' pr lesser ,  than find nums right side  
+        }// by end of the loop 'low' find correct position 
+        return low + k;
