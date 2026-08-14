@@ -39,3 +39,6 @@
             else low = mid +1; // Agar current element target se chhota hai, toh target right half me hoga
         }
          return false; // target not found 
+
+
+kth missing positive number 
