@@ -26,8 +26,9 @@
         int posCount = n - lo; //Nums of positive elem 
         return Math.max(negCount, posCount);
 
-Search a 2D matrix
-find total rows and cols in the matrix
+
+//Search a 2D matrix
+//find total rows and cols in the matrix
         int rows = arr.length, cols = arr[0].length;
         int low = 0, high = rows * cols -1;// find total elem in the matrix
         while(low<=high){
@@ -51,3 +52,25 @@ kth missing positive number
             else low = mid +1 ;// if miss count 'k' pr lesser ,  than find nums right side  
         }// by end of the loop 'low' find correct position 
         return low + k;
+
+
+// ROTATE MATRIX BY 90 DEGREE 
+        // transpose of matrix
+        int n = arr.length;// storerows and col, n x n matrix
+        for(int i = 0; i<n;i++){ // iterate each row i
+            for(int j  = 0; j<i; j++){// iterate elem below main diagonal, j <i each pair (i,j) swap (j,i) exactly one , avoid double swap
+                int temp = arr[i][j];
+                arr[i][j] = arr[j][i];
+                arr[j][i] = temp;
+            }
+        }// raverse each row horizontally
+         for(int i = 0; i<n; i++){// process every row individually
+            int stCol = 0, endCol = n -1; // two pointers for column swap
+            while(stCol < endCol){
+                int temp = arr[i][stCol];// Swap left element with right element
+                arr[i][stCol] = arr[i][endCol];
+                arr[i][endCol] = temp;
+                stCol++;
+                endCol--;
+            }
+        }
