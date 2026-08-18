@@ -74,3 +74,40 @@ kth missing positive number
                 endCol--;
             }
         }
+
+
+
+// PASCAL'S TRIANGLE 
+        // Step 1: Pura Pascal's Triangle store karne ke liye main 2D list banayi
+        List<List<Integer>> ans = new ArrayList<>();
+
+        // ===== PASS 1: Triangle ka structure banana =====
+        // Har row (i) ke liye ek khali list banayenge aur usme temporary '1' bhar denge
+        for (int i = 0; i < n; i++) {
+            List<Integer> list = new ArrayList<>();
+            for (int j = 0; j <= i; j++) {
+                list.add(1); // Row 'i' mein (i + 1) baar 1 add hoga
+            }
+            ans.add(list); // Is dummy row ko main triangle list mein add kar diya
+        }
+
+        // ===== PASS 2: Middle values calculate aur update karna =====
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j <= i; j++) {
+                // Rule 1: Row ka pehla (j=0) aur aakhri (j=i) element hamesha 1 hota hai
+                if (j == 0 || j == i) {
+                    ans.get(i).set(j, 1);
+                } 
+                // Rule 2: Beech ke elements = Upar ke do numbers ka SUM
+                else {
+                    // ans.get(i-1).get(j)     -> Exactly upar wala number (Right diagonal)
+                    // ans.get(i-1).get(j-1)   -> Upar ke left wala number (Left diagonal)
+                    int var = ans.get(i - 1).get(j) + ans.get(i - 1).get(j - 1); // var = arr[i-1][j]+arr[i-1][j-1]
+                    
+                    // Old dummy '1' ko hatakay calculate kiya hua sum set kar do
+                    ans.get(i).set(j, var);
+                }
+            }
+        }
+        // Complete 2D list return kar do
+        return ans;
