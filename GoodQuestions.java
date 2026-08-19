@@ -111,3 +111,47 @@ kth missing positive number
         }
         // Complete 2D list return kar do
         return ans;
+
+
+// spiral MATRIX 
+        ArrayList<Integer> ans = new ArrayList<>();
+        int m = arr.length, n = arr[0].length;
+        
+        // Define 4 boundary pointers to keep track of the remaining matrix
+        int firstRow = 0, lastRow = m - 1, firstCol = 0, lastCol = n - 1;
+
+        // Continue until the boundaries overlap/cross each other
+        while (firstRow <= lastRow && firstCol <= lastCol) {
+            
+            // 1. Move RIGHT along the current top row
+            for (int j = firstCol; j <= lastCol; j++) 
+                ans.add(arr[firstRow][j]);
+            firstRow++; // Top boundary shrinks down
+
+            // Check if boundaries cross before proceeding
+            if (firstRow > lastRow || firstCol > lastCol) break;
+
+            // 2. Move DOWN along the current rightmost column
+            for (int i = firstRow; i <= lastRow; i++) 
+                ans.add(arr[i][lastCol]);
+            lastCol--; // Right boundary shrinks left
+
+            // Check if boundaries cross before proceeding
+            if (firstRow > lastRow || firstCol > lastCol) break;
+
+            // 3. Move LEFT along the current bottom row
+            for (int j = lastCol; j >= firstCol; j--) 
+                ans.add(arr[lastRow][j]);
+            lastRow--; // Bottom boundary shrinks up
+
+            // Check if boundaries cross before proceeding
+            if (firstRow > lastRow || firstCol > lastCol) break;
+
+            // 4. Move UP along the current leftmost column
+            for (int i = lastRow; i >= firstRow; i--) 
+                ans.add(arr[i][firstCol]);
+            firstCol++; // Left boundary shrinks right
+        }
+        
+        return ans;
+ 
