@@ -154,4 +154,25 @@ kth missing positive number
         }
         
         return ans;
- 
+
+
+// Factorial trailing zeroes
+        // Keeps track of the total count of trailing zeroes
+        int zeroes = 0; 
+
+        // Loop until n is reduced to 0
+        // Each iteration processes the next power of 5 (5, 25, 125, ...)
+        while (n > 0) {
+            // Count how many multiples of 5 exist in the current range
+            // Iteration 1: counts multiples of 5   (5, 10, 15, 20, 25...)
+            // Iteration 2: counts multiples of 25  (25, 50, 75...)
+            // Iteration 3: counts multiples of 125 (125, 250...)
+            zeroes += n / 5; 
+            // Divide n by 5 to move to the next power of 5 in the next iteration
+            n /= 5; 
+        } 
+        // Return the final calculated count of trailing zeroes
+        return zeroes; 
+    } 
+}
+
