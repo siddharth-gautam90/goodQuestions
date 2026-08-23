@@ -176,3 +176,32 @@ kth missing positive number
     } 
 }
 
+
+
+/// UNIQUE PATHS , M = ROWS , N = COLUMNS 
+//// TRY AGAIN THIS PROBLEM , AFTER START DP
+// 
+
+        // DP Table: path[i][j] stores the number of unique paths to reach cell (i, j)
+        int[][] path = new int[m][n];
+
+        // Iterate through every cell in the m x n grid
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                
+                // Base Case: First row or first column cells only have 1 path 
+                // (moving strictly right or strictly down)
+                if (i == 0 || j == 0) {
+                    path[i][j] = 1;
+                } 
+                // Transition Relation: Current cell paths = paths from Top + paths from Left
+                else {
+                    path[i][j] = path[i - 1][j] + path[i][j - 1];
+                }
+            }
+        }
+
+        // Return the accumulated total paths for the bottom-right target cell
+        return path[m - 1][n - 1];
+    }
+}
