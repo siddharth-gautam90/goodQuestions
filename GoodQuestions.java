@@ -205,3 +205,50 @@ kth missing positive number
         return path[m - 1][n - 1];
     }
 }
+
+
+// Set/array ,ismatch 
+
+class Solution {
+    public int[] findErrorNums(int[] arr) {
+        int n = arr.length;
+        int i = 0;
+
+        // --- STEP 1: CYCLIC SORT ---
+        // Since values range from 1 to n, each number 'x' belongs at index 'x - 1'.
+        // We place every element into its correct index via swapping.
+        while (i < n) {
+            // Calculate where arr[i] ought to live in a zero-indexed array
+            int idx = arr[i] - 1; 
+
+            // If current number is NOT at its correct target index, swap it
+            if (arr[i] != arr[idx]) {
+                swap(arr, i, idx); 
+            } else {
+                // If it's already in the correct place (or a duplicate of it is), move forward
+                i++;
+            }
+        }
+
+        // --- STEP 2: FIND DUP & MISSING ---
+        // Iterate through sorted array to find the index that holds the wrong number
+        for (i = 0; i < n; i++) {
+            // If the element at index i doesn't equal (i + 1):
+            if (arr[i] != i + 1) {
+                // arr[i] is the Duplicate number (occupying someone else's spot)
+                // (i + 1) is the Missing number (the expected value for index i)
+                return new int[] {arr[i], i + 1};
+            }
+        }
+
+        // Default fallback (won't be reached under valid test constraints)
+        return new int[]{-1, -1};
+    }
+
+    // Helper method to swap elements at indices i and idx
+    public static void swap(int[] arr, int i, int idx) {
+        int temp = arr[i];
+        arr[i] = arr[idx];
+        arr[idx] = temp;
+    }
+}
