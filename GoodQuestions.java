@@ -252,3 +252,8 @@ class Solution {
         arr[idx] = temp;
     }
 }
+ public void deleteNode(ListNode target) {
+        // ListNode temp = new ListNode();
+        target.val = target.next.next;
+        target.next = target.next.next.; // delete the value of the idx 
+    }
